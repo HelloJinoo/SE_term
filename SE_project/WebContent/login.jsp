@@ -29,7 +29,7 @@
 			
 			if( authority ==0 ){%>
 				<script>
-				location.href ="after_login_managerMain.jsp?<%=id%>"; //관리자 메인
+				location.href ="after_login_managerMain.jsp?<%=id%>" ; //관리자 메인
 				</script>
 			<%}
 			else if( authority == 1){%>

@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 <%@page import="se.Subject" %>
  <%@page import="java.sql.ResultSet" %>  
+ <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="style.css" rel="stylesheet">
+<link rel="stylesheet" href="Main.css">
 </head>
 <body>
 	<h2>성적부여 화면</h2>
@@ -17,6 +20,37 @@
 		if(rs.next()){
 			rs.previous();
 		%>
+			<nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
+			<div class="login_container">
+					<p class="bold text-right log" > <%=(String)session.getAttribute("id")%> 로그인하셨습니다.</p>
+			</div>
+
+        <div class="container navigation">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+       
+            </div>
+
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+			  <ul class="nav navbar-nav">
+				<li class="active"><a href="after_login_studentMain.jsp">Home</a></li>
+				<li><a href="show_myinformation.jsp?id=<%=session.getAttribute("id") %>">개인정보조회</a></li>
+				<li><a href="show_allsubject.jsp">수강편람조회</a></li>
+				<li><a href="apply_subject.jsp">수강신청</a></li>
+				<li><a href="view_timetable.jsp">시간표확인</a></li>
+				<li><a href="check_grade.jsp">성적조회</a></li>
+				<li><a href="check_graduate.jsp">졸업자가진단</a></li>
+				<li><a href="check_scholarship.jsp">장학여부확인</a></li>
+				<li><a onclick="logout()">로그아웃</a></li>
+			  </ul>
+            </div>
+         
+        </div>
+    </nav>
+    
+    <div class="show_box">
 		
 		<table class="myinformation" >
 				<tr>
@@ -67,5 +101,6 @@
 					location.href="after_login_professorMain.jsp";
 				</script>
 			<% }%>
+		</div>
 </body>
 </html>

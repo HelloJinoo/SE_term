@@ -8,7 +8,7 @@
 <script src="function.js"></script>
 </head>
 <body>
-
+			<h2><%=session.getAttribute("id")%> 로그인하셨습니다.</h2>
 			<form action="regist_subject.jsp" method ="post">
 				<input type="submit" value="강의등록" >
 			</form>

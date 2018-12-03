@@ -6,11 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="Main.css">
+<link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+
 <script src="function.js"></script>
-<title>Insert title here</title>
+<title>학생 페이지</title>
 </head>
 <body>
-	
+	<!--
 		<form action="show_myinformation.jsp" method ="post">
 			<input type="submit" value="개인정보확인" name="id" >
 		</form>
@@ -34,6 +36,38 @@
 			<input type="submit" value="장학여부확인" >
 		</form>
 			<input type="button" value ="로그아웃" onclick="logout()">
+	-->
+		
+	<nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
+			<div class="login_container">
+					<p class="bold text-right log" > <%=(String)session.getAttribute("id")%> 로그인하셨습니다.</p>
+			</div>
+
+        <div class="container navigation">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+       
+            </div>
+
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+			  <ul class="nav navbar-nav">
+				<li class="active"><a href="after_login_studentMain.jsp">Home</a></li>
+				<li><a href="show_myinformation.jsp?id=<%=session.getAttribute("id") %>">개인정보조회</a></li>
+				<li><a href="show_allsubject.jsp">수강편람조회</a></li>
+				<li><a href="apply_subject.jsp">수강신청</a></li>
+				<li><a href="view_timetable.jsp">시간표확인</a></li>
+				<li><a href="check_grade.jsp">성적조회</a></li>
+				<li><a href="check_graduate.jsp">졸업자가진단</a></li>
+				<li><a href="check_scholarship.jsp">장학여부확인</a></li>
+				<li><a onclick="logout()" style="cursor:pointer">로그아웃</a></li>
+			  </ul>
+            </div>
+         
+        </div>
+    </nav>
+	
 	
 </body>
 </html>

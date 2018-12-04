@@ -8,7 +8,7 @@
   <%@ page import ="se.Member,com.mysql.jdbc.Connection" %>
   <link rel="stylesheet" href="Main.css">
    <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
-
+<script src="function.js"></script>
 <title>Insert title here</title>
 </head>
 <body>

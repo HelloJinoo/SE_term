@@ -6,6 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="Main.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -15,6 +17,35 @@
 		if(rs.next()){
 			rs.previous();
 		%>
+		
+		<nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
+			<div class="login_container">
+					<p class="bold text-right log" > <%=(String)session.getAttribute("id")%> 로그인하셨습니다.</p>
+			</div>
+
+        <div class="container navigation">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+       
+            </div>
+
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+			  <ul class="nav navbar-nav">
+				<li class="active"><a href="after_login_managerMain.jsp">Home</a></li>
+				<li><a href="show_member.jsp">회원조회</a></li>
+				<li><a href="regist_member.jsp">회원등록</a></li>
+				<li><a href="modify_member.jsp">회원수정</a></li>
+				<li><a href="manage_scholarship.jsp">장학관리</a></li>
+				<li><a onclick="logout()" style="cursor:pointer">로그아웃</a></li>
+			  </ul>
+            </div>
+         
+        </div>
+    </nav>
+    
+    <div class="show_box">
 		<form action ="manage_scholarship2.jsp">
 		<table class="myinformation" >
 				<tr>
@@ -30,10 +61,9 @@
 				</tr>
 		<% 
 		while(rs.next()){
-			
 				float sum = Integer.parseInt( rs.getString("sum(score)"));
 				float total_subject = Integer.parseInt(rs.getString("count(*)"));
-				String total_grade = String.format("%.2f", sum/total_subject) ;
+				String total_grade = String.format("%.2f", sum / total_subject) ;
 				
 	%>
 			<tr>
@@ -57,6 +87,7 @@
 			</table>
 			<input type="submit" value="장학생 등록">
 			</form>
+			</div>
 			<%}
 				else{
 			%>

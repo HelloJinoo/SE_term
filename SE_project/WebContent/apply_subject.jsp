@@ -8,7 +8,7 @@
 <%@ page import ="se.Subject" %>
 <link rel="stylesheet" href="Main.css">
 <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
-
+<script src="function.js"></script>
 <%@page import="java.sql.ResultSet" %> 
 </head>
 <body>

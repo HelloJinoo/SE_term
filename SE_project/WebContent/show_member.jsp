@@ -5,7 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src = "function.js"></script>
+<link rel="stylesheet" href="Main.css">
+<link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+<script src="function.js"></script>
 <%@page import="se.Member" %>
     <%@page import="java.sql.ResultSet" %>  
 </head>
@@ -14,7 +16,34 @@
 			Member m = new Member();
 			ResultSet rs = m.show_member();
 		%>
+			<nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
+			<div class="login_container">
+					<p class="bold text-right log" > <%=(String)session.getAttribute("id")%> 로그인하셨습니다.</p>
+			</div>
+
+        <div class="container navigation">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+       
+            </div>
+
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+			  <ul class="nav navbar-nav">
+				<li class="active"><a href="after_login_managerMain.jsp">Home</a></li>
+				<li><a href="show_member.jsp">회원조회</a></li>
+				<li><a href="regist_member.jsp">회원등록</a></li>
+				<li><a href="modify_member.jsp">회원수정</a></li>
+				<li><a href="manage_scholarship.jsp">장학관리</a></li>
+				<li><a onclick="logout()" style="cursor:pointer">로그아웃</a></li>
+			  </ul>
+            </div>
+         
+        </div>
+    </nav>
 		
+	<div class="show_box">
 		<h2>회원 전체 조회</h2>
 		<table class="myinformation" >
 			<tr>
@@ -39,6 +68,7 @@
 			</tr>
 			<%
 				while(rs.next()){
+					if(!rs.getString("id").equals("admin")){
 			%>
 			<tr>
 				<td>
@@ -96,9 +126,11 @@
 					
 				</td>
 			</tr>
-		<%}
-			%>
 			
+		<%	}
+		}
+			%>
 		</table>
+		</div>
 </body>
 </html>

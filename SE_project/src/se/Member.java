@@ -1,7 +1,11 @@
 package se;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+
+import javax.sound.sampled.AudioFormat.Encoding;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -74,6 +78,8 @@ public class Member {
 	/*관리자 - 회원등록*/
 	public boolean regist_member(String id , String password, String address , int current , int authority) throws Exception{
 		conn = getConnection();
+		id = URLDecoder.decode(id, "utf-8");
+		address = URLDecoder.decode(address, "utf-8");
 		sql = "insert into member values(?,?,?,?,?)";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, id);
@@ -107,6 +113,22 @@ public class Member {
 		
 	}
 	
+	/*중복여부*/
+	public boolean check(String id) throws Exception{
+		conn = getConnection();
+		sql = "select * from member where id = ?";
+		pstmt = (PreparedStatement) conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		 rs = pstmt.executeQuery();
+		if(rs.next()){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
+	
 	/* 교수 - 강의신청한 학생보기*/
 	public ResultSet apply_student(String subject_number) throws Exception{
 		conn = getConnection();
@@ -124,7 +146,7 @@ public class Member {
 	}
 	
 	public Connection getConnection() throws Exception{
-		String jdbcUrl = "jdbc:mysql://localhost:3306/se_term";
+		String jdbcUrl = "jdbc:mysql://localhost:3306/se_term?useUnicode=true&characterEncoding=utf8";
 		Class.forName("com.mysql.jdbc.Driver");
 		conn = (Connection) DriverManager.getConnection(jdbcUrl, "root", "asdasd1");
 		return conn;

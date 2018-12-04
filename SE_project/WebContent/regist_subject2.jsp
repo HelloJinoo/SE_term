@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <%@page import ="se.Subject" %>
+<%request.setCharacterEncoding("utf-8"); %>
 <body>
 <%		
 		String id = (String)session.getAttribute("id");
@@ -18,22 +19,32 @@
 		String place= request.getParameter("place");
 		String personnel = request.getParameter("personnel");
 		Subject s = new Subject();
-		boolean result = s.regist_subject(id,sub_name, pro_name, Integer.parseInt(grade), Integer.parseInt(personnel),time, day, place);
-		if( result == true){
-			%>
-			<script>
-			alert("강의 등록 성공");
-			location.href ="after_login_professorMain.jsp";
-			</script>
-			<% 
-			
+		if(!s.check_room(time,day,place)){
+			boolean result = s.regist_subject(id,sub_name, pro_name, Integer.parseInt(grade), Integer.parseInt(personnel),time, day, place);
+			if( result == true){
+				%>
+				<script>
+				alert("강의 등록 성공");
+				location.href ="after_login_professorMain.jsp";
+				</script>
+				<% 
+				
+			}
+			else{
+				%>
+				<script>
+				alert("강의 등록 실패");
+				location.href ="regist_subject.jsp";
+				</script>
+				<% 
+			}
 		}
 		else{
 			%>
-			<script>
-			alert("강의 등록 실패");
-			location.href ="after_login_professorMain.jsp";
-			</script>
+				<script>
+				alert("이미 등록된 강의가 있습니다.");
+				location.href ="regist_subject.jsp";
+				</script>
 			<% 
 		}
 	%>

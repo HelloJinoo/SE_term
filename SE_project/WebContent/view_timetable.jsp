@@ -11,6 +11,7 @@
  <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="function.js"></script>
 </head>
+<%request.setCharacterEncoding("utf-8"); %>
 <body>
 
 		<%

@@ -11,6 +11,7 @@
 <%@page import="se.Member" %>
     <%@page import="java.sql.ResultSet" %>  
 </head>
+<%request.setCharacterEncoding("utf-8"); %>
 <body>
 <% 
 			Member m = new Member();

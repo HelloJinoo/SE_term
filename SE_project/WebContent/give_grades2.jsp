@@ -9,6 +9,7 @@
 <%@page import="se.Subject" %>
 </head>
 <body>
+<%request.setCharacterEncoding("utf-8"); %>
 	<%
 		String  value[] = request.getParameterValues("grade");
 		String subject_number = request.getParameter("subject_number");

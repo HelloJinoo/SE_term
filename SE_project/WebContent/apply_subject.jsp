@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <%@ page import ="se.Subject" %>
+<%request.setCharacterEncoding("utf-8"); %>
 <link rel="stylesheet" href="Main.css">
 <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="function.js"></script>
@@ -87,7 +88,7 @@
 	%>
 			<tr>
 				<td>
-					<input type ="button" value ="신청" onClick="location.href='apply_subject2.jsp?subject_num=<%=rs.getString("subject_number") %>'">
+					<input type ="button" value ="신청" onClick="location.href='apply_subject2.jsp?subject_num=<%=rs.getString("subject_number")%>'">
 				</td>
 				<td>
 				<%=  rs.getString("subject_number")%>

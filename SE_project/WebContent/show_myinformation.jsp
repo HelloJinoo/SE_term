@@ -12,6 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%request.setCharacterEncoding("utf-8"); %>
 		<% 
 			Member m = new Member();
 			ResultSet rs = m.show_myinformation( (String)session.getAttribute("id"));

@@ -96,6 +96,25 @@ public class Subject {
 			return false;
 		}
 	}
+	/*강의실 등록가능여부 */
+	public boolean check_room(String time,String day, String place) throws Exception{
+		conn = getConnection();
+		sql = "select * from subject where time = ? && day = ? && place = ?";
+		pstmt = (PreparedStatement) conn.prepareStatement(sql);
+		pstmt.setString(1, time);
+		pstmt.setString(2, day);
+		pstmt.setString(3,place);
+		rs = pstmt.executeQuery();
+		if(rs.next()){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
+	
+	
 	/*시간표 확인*/
 	public ResultSet view_timetable(String id) throws Exception{
 		conn = getConnection();
@@ -158,7 +177,7 @@ public class Subject {
 		}
 	}
 	public Connection getConnection() throws Exception{
-		String jdbcUrl = "jdbc:mysql://localhost:3306/se_term";
+		String jdbcUrl = "jdbc:mysql://localhost:3306/se_term?useUnicode=true&characterEncoding=utf8";
 		Class.forName("com.mysql.jdbc.Driver");
 		conn = (Connection) DriverManager.getConnection(jdbcUrl, "root", "asdasd1");
 		return conn;

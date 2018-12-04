@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="Main.css">
 <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="function.js"></script>
+<%request.setCharacterEncoding("utf-8"); %>
 </head>
 <body>
 
@@ -46,7 +47,7 @@
 								ID
 							</td>
 							<td>
-								<input type="text" name="id" required>
+								<input type="text" name="id"  required>
 							</td>
 						</tr>
 						<tr>

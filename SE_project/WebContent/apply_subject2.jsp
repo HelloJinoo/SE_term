@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,6 +15,7 @@
 		String sub_number = request.getParameter("subject_num");
 		
 		Subject s = new Subject();
+		if(session.getAttribute("current").equals("1")){
 		boolean result = s.apply_subject(id, sub_number);
 		if( result == true){
 			%>
@@ -28,6 +30,15 @@
 			<script>	
 					alert("이미 신청한 강의입니다.");
 					location.href="apply_subject.jsp";
+				</script>
+			<% 
+		 }
+		}
+		else{
+			%>
+				<script>
+					alert("휴학 상태입니다.");
+					location.href="after_login_studentMain.jsp";
 				</script>
 			<% 
 		}

@@ -8,6 +8,7 @@
 <%@page import="se.Scholarship" %>
 <title>Insert title here</title>
 </head>
+<%request.setCharacterEncoding("utf-8"); %>
 <body>
 		<% 
 			int flag =0;

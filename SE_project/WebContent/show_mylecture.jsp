@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="Main.css">
 <script src="function.js"></script>
 </head>
+<%request.setCharacterEncoding("utf-8"); %>
 <body>
 	<h2>성적부여 화면</h2>
 	<% 

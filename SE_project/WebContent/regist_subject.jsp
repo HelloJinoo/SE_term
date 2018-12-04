@@ -10,6 +10,7 @@
 <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="function.js"></script>
 </head>
+<%request.setCharacterEncoding("utf-8"); %>
 <body>
 
        		<nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
@@ -53,7 +54,7 @@
 					교수명 
 				</td> 
 				<td>
-				<input type="text" name="pro_name" value=<%=session.getAttribute("id")%> disabled="true" style="width:250px"> 
+				<input type="text" name="pro_name" value=<%=session.getAttribute("id")%>  style="width:250px"> 
 				</td>
 			</tr>
 			<tr>
@@ -61,7 +62,7 @@
 					학년 
 				</td>
 				 <td>
-					<input type="number" name="grade" required style="width:250px"> 
+					<input type="number" name="grade" min=1 max=4 required style="width:250px"> 
 				 </td>
 			</tr>
 			<tr>
@@ -69,7 +70,7 @@
 					인원 
 				</td>
 				 <td>
-					<input type="number" name="personnel" required style="width:250px">
+					<input type="number" name="personnel" max=60 required style="width:250px">
 				 </td>
 			</tr>
 			<tr>
@@ -77,7 +78,7 @@
 					시간 
 				</td>
 				 <td>
-					 <input type="text" name="time" required style="width:250px">
+					 <input type="text" name="time" required style="width:250px" pattern="[0-9]{2}:[0-9]{2}~[0-9]{2}:[0-9]{2}" title="ex)11:00~13:00">
 				 </td>
 			</tr>
 			<tr>
@@ -85,7 +86,13 @@
 					요일 
 				</td>
 				 <td>
-					<input type="text" name="day" required style="width:250px"> 
+					<select name ="day" style="width:250px">
+								<option>월요일</option>
+								<option>화요일</option>
+								<option>수요일</option>
+								<option>목요일</option>
+								<option>금요일</option>
+					</select>
 				 </td>
 			</tr>
 			<tr>
@@ -93,12 +100,20 @@
 					장소 
 				</td>
 				 <td>
-					<input type="text" name="place" required style="width:250px">
+					<select name ="place" style="width:250px">
+								<option>공대5호관 401호</option>
+								<option>공대5호관 402호</option>
+								<option>공대5호관 403호</option>
+								<option>공대5호관 404호</option>
+								<option>공대5호관 405호</option>
+								<option>공대5호관 406호</option>
+								<option>공대5호관 407호</option>
+								<option>공대5호관 408호</option>
+								<option>공대5호관 409호</option>
+								<option>공대5호관 410호</option>
+					</select>
 				 </td>
 			</tr>
-			
-			
-	
 			</table>
 			<input type="submit" value="강의등록" > 
 		</form>

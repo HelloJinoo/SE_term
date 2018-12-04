@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<%request.setCharacterEncoding("utf-8"); %>
 	<%
 		
 		String id = request.getParameter("id");
@@ -25,20 +25,28 @@
 			</script>
 			<%
 			int authority=l.getAuthority();
+			session.setAttribute("current", l.getCurrent());
 			
-			
-			if( authority ==0 ){%>
+			if( authority ==0 ){
+				
+			%>
 				<script>
 				location.href ="after_login_managerMain.jsp?<%=id%>" ; //관리자 메인
 				</script>
 			<%}
-			else if( authority == 1){%>
+			else if( authority == 1){
+				
+			%>
 				<script>
+				
 				location.href ="after_login_studentMain.jsp"; //학생메인
 				</script>
 			<% }
-			else if( authority == 2){%>
+			else if( authority == 2){
+				
+			%>
 				<script>
+				
 				location.href ="after_login_professorMain.jsp"; //교수 메인
 				</script>
 			<% }

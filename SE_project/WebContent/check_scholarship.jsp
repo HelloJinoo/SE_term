@@ -8,6 +8,7 @@
 <%@page import="se.Scholarship" %>
  <%@page import="java.sql.ResultSet" %>  
 </head>
+<%request.setCharacterEncoding("utf-8"); %>
 <body>
 	<% 
 		Scholarship s = new Scholarship();

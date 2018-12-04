@@ -21,7 +21,7 @@ public class Scholarship {
 	/*관리자 - 전체 학생의 성적 보여주기*/
 	public ResultSet manage_scholarship() throws Exception{
 		conn = getConnection();
-		sql ="select id,sum(score) , count(*) from apply where score !=0 group by id order by sum(score)";
+		sql ="select id,sum(score) , count(*) from apply where score !=0 order by sum(score)";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 		if( rs.next() ){

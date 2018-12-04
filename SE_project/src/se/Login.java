@@ -13,7 +13,7 @@ public class Login {
 	String sql ="";
 	int fail_reason = 0;
 	int authority=0;
-	
+	int current =0;
 	public Login(){
 		
 	}
@@ -23,12 +23,15 @@ public class Login {
 	public int getAuthority(){
 		return authority;
 	}
+	public int getCurrent(){
+		return current;
+	}
 	
 	public boolean check(String id , String pwd) throws Exception{
 		boolean login_confirm = false;
 		
 		conn = getConnection();
-		sql = "select password , authority from member where id = ?";
+		sql = "select password , authority , current from member where id = ?";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		rs = pstmt.executeQuery();
@@ -36,6 +39,7 @@ public class Login {
 			if(rs.getString("password").equals(pwd)){
 				//로그인 성공
 				authority =	rs.getInt("authority");
+				current = rs.getInt("current");
 				login_confirm =  true;
 			}
 			else{

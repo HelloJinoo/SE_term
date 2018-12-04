@@ -13,6 +13,7 @@
  <%@page import="java.sql.ResultSet" %>  
  <script src="function.js"></script>
 </head>
+<%request.setCharacterEncoding("utf-8"); %>
 <body>
 	
 	<% 

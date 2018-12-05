@@ -7,8 +7,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="Main.css?ver=1">
  <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="Main.css">
+ <script src="function.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -32,20 +33,20 @@
        
             </div>
 
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+          <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
 			  <ul class="nav navbar-nav">
 				<li class="active"><a href="after_login_managerMain.jsp">Home</a></li>
 				<li><a href="show_member.jsp">회원조회</a></li>
 				<li><a href="regist_member.jsp">회원등록</a></li>
-				<li><a href="modify_member.jsp">회원수정</a></li>
 				<li><a href="manage_scholarship.jsp">장학관리</a></li>
 				<li><a onclick="logout()" style="cursor:pointer">로그아웃</a></li>
 			  </ul>
             </div>
+            
          
         </div>
     </nav>
-    
+    <img src="./cnu.jpg" class="back back2">
     <div class="show_box">
 		<form action ="manage_scholarship2.jsp">
 		<table class="myinformation" >
@@ -62,9 +63,9 @@
 				</tr>
 		<% 
 		while(rs.next()){
-				float sum = Integer.parseInt( rs.getString("sum(score)"));
-				float total_subject = Integer.parseInt(rs.getString("count(*)"));
-				String total_grade = String.format("%.2f", sum / total_subject) ;
+				String a= rs.getString("sum(score)/count(*)");
+				float total_subject = Float.parseFloat(rs.getString("sum(score)/count(*)"));
+				String total_grade = String.format("%.2f", total_subject) ;
 				
 	%>
 			<tr>

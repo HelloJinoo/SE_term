@@ -14,6 +14,14 @@
 	height:50px;
 	
 }
+.back{
+	width:100%;
+	
+}
+.back2{
+	width:100%;
+	opacity:0.15; 
+}
 .main_box{
 	position:absolute;
  	 top:20%;

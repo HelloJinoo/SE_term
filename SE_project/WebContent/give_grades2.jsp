@@ -28,7 +28,7 @@
 		}else{%>
 				<script>
 				alert("성적부여에 실패하였습니다.");
-				location.href ="after_login_professorMain.jsp";
+				location.href ="give_grades.jsp";
 				</script>
 		<% 
 		}

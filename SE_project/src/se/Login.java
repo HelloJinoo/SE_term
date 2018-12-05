@@ -41,13 +41,11 @@ public class Login {
 				authority =	rs.getInt("authority");
 				current = rs.getInt("current");
 				login_confirm =  true;
-			}
-			else{
+			} else{
 				//잘못된 비밀번호
 				fail_reason = 1;
 			}
-     }
-	    else{
+		} else{
 	    	fail_reason= 2;
 	    	//잘못된 아이디
 	    }
@@ -56,7 +54,7 @@ public class Login {
 	}
 	
 	public Connection getConnection() throws Exception{
-		String jdbcUrl = "jdbc:mysql://localhost:3306/se_term";
+		String jdbcUrl = "jdbc:mysql://localhost:3306/se_term?useUnicode=true&characterEncoding=utf8";
 		Class.forName("com.mysql.jdbc.Driver");
 		conn = (Connection) DriverManager.getConnection(jdbcUrl, "root", "asdasd1");
 		return conn;

@@ -15,23 +15,34 @@
 		String sub_number = request.getParameter("subject_num");
 		
 		Subject s = new Subject();
-		if(session.getAttribute("current").equals("1")){
-		boolean result = s.apply_subject(id, sub_number);
+		if((int)session.getAttribute("current") ==1 ){
+		boolean result = s.course_subject(id, sub_number);
 		if( result == true){
 			%>
 				<script>	
 					alert("수강신청되었습니다.");
-					location.href="after_login_studentMain.jsp";
+					location.href="apply_subject.jsp";
 				</script>
 			<% 
 		}
 		else{
+			int fresult = s.getApply_result();
+			if( fresult == 0){
 			%>
 			<script>	
 					alert("이미 신청한 강의입니다.");
 					location.href="apply_subject.jsp";
 				</script>
 			<% 
+			}
+			else{
+				%>
+				<script>	
+						alert("신청인원이 초과하였습니다.");
+						location.href="apply_subject.jsp";
+					</script>
+				<% 
+			}
 		 }
 		}
 		else{

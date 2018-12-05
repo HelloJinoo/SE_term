@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>교수 페이지</title>
-<link rel="stylesheet" href="Main.css?after">
+<link rel="stylesheet" href="Main.css?ver=1">
 <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="function.js"></script>
 </head>
@@ -37,7 +37,7 @@
          
         </div>
     </nav>
-    
+    <img src="./cnu.jpg" class="back back2">
     <div class = "show_box2">
 		<h2>강의등록</h2>
 		<form action="regist_subject2.jsp">

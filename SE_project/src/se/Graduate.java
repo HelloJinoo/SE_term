@@ -13,6 +13,7 @@ public class Graduate{
 	ResultSet rs = null;
 	String sql ="";
 	
+	
 	public Graduate(){
 		
 	}
@@ -21,7 +22,7 @@ public class Graduate{
 	public ResultSet subject_totalcount(String id) throws Exception{
 		
 		conn = getConnection();
-		sql = "select count(*) from subject , apply where apply.id = ? && apply.subject_number = subject.subject_number && apply.score !='0' ";
+		sql = "select count(*) from subject , course where course.id = ? && course.subject_number = subject.subject_number && course.score !='0' ";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		rs = pstmt.executeQuery();

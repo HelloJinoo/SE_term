@@ -2,8 +2,6 @@ package se;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -22,7 +20,6 @@ public class Subject {
 	public ResultSet show_Allsubject() throws Exception{
 		conn = getConnection();
 		sql = "select * from subject";
-		//sql = " select count(*) ,subject.subject_number , subject.subject_name ,subject.professor_name, subject.time,subject.day,subject.grade , subject.place, subject.personnel from subject , apply where subject.subject_number = apply.subject_number";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 	
@@ -32,6 +29,7 @@ public class Subject {
 		}
 		return rs;
 	}
+	
 	
 	/*교수 - 강의 등록*/
 	public boolean regist_subject(String id ,String subejct_name , String professor_name ,int grade, int personnel,String time, String day , String place) throws Exception{
@@ -49,12 +47,8 @@ public class Subject {
 		pstmt.setInt(8,personnel);
 		int result = pstmt.executeUpdate();
 		
-		sql = "insert into regist values(?,?)";
-		pstmt = (PreparedStatement) conn.prepareStatement(sql);
-		pstmt.setString(1, id);
-		pstmt.setString(2, subject_number);
-		int result2 = pstmt.executeUpdate();
-		if(result == 0 || result2 ==0){
+		
+		if(result == 0 ){
 			return false;
 		}
 		else{
@@ -63,18 +57,42 @@ public class Subject {
 		
 		
 	}
+	/*전체인원*/
+	public int total_countSubject(String subject_num) throws Exception{
+		conn = getConnection();
+		sql = "select personnel from subject where subject_number = ?";
+		pstmt = (PreparedStatement) conn.prepareStatement(sql);
+		pstmt.setString(1, subject_num);
+		rs = pstmt.executeQuery();
+		if(rs.next()){
+			return Integer.parseInt(rs.getString("personnel"));
+		}
+		else{
+			return Integer.parseInt(rs.getString("personnel"));
+		}
+	}
+	int apply_result =0;
+	public int getApply_result(){
+		return apply_result;
+	}
 	/*학생 - 강의신청*/
-	public boolean apply_subject(String id , String subject_num) throws Exception{
+	public boolean course_subject(String id , String subject_num) throws Exception{
 		if(!check_mysubject(id, subject_num)){
+			if(find_applycount(subject_num) < total_countSubject(subject_num) ){
 			conn = getConnection();
-			sql = "insert into apply values(?,?,?,?)";
+			sql = "insert into course values(?,?,?,?)";
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, subject_num);
 			pstmt.setString(3, "");
 			pstmt.setInt(4,0);
-			int result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			return true;
+			}
+			else{
+				apply_result =1;
+				return false;
+			}
 		}
 		else{
 			return false;
@@ -84,7 +102,7 @@ public class Subject {
 	/*신청 강의가 있는지 확인*/
 	private boolean check_mysubject(String id , String subject_num) throws Exception{
 		conn = getConnection();
-		sql = "select * from apply where id =? && subject_number = ?";
+		sql = "select * from course where id =? && subject_number = ?";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		pstmt.setString(2, subject_num);
@@ -118,7 +136,7 @@ public class Subject {
 	/*시간표 확인*/
 	public ResultSet view_timetable(String id) throws Exception{
 		conn = getConnection();
-		sql = "select * from subject , apply where apply.id = ? && apply.subject_number = subject.subject_number";
+		sql = "select * from subject , course where course.id = ? && course.subject_number = subject.subject_number";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		rs = pstmt.executeQuery();
@@ -134,7 +152,7 @@ public class Subject {
 	/* 학생 - 수강취소 */
 	public boolean cancel_subject(String id , String subject_num) throws Exception{
 			conn = getConnection();
-			sql = "delete from apply where id =? && subject_number = ?";
+			sql = "delete from course where id =? && subject_number = ?";
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, subject_num);
@@ -149,7 +167,7 @@ public class Subject {
 	/*교수 - 자신의 강의 목록*/
 	public ResultSet show_mylecture(String id) throws Exception{
 		conn = getConnection();
-		sql = "select * from regist , subject where regist.id = ? &&regist.subject_number = subject.subject_number";
+		sql = "select * from  subject where professor_name = ?";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		rs = pstmt.executeQuery();
@@ -161,7 +179,21 @@ public class Subject {
 			return rs;
 		}
 	}
-	
+	/*강의를 신청한 학생 수 */
+	public int find_applycount(String subject_number) throws Exception{
+		conn = getConnection();
+		sql = "select count(*) from course where subject_number = ?";
+		pstmt = (PreparedStatement) conn.prepareStatement(sql);
+		pstmt.setString(1, subject_number);
+		rs = pstmt.executeQuery();
+		if(rs.next()){
+			return Integer.parseInt(rs.getString("count(*)"));
+		}
+		else{
+			return Integer.parseInt(rs.getString("count(*)"));
+		}
+		
+	}
 	
 	/*등록된 강의 수*/
 	private int find_subjectcount() throws Exception {

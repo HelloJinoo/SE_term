@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="Main.css">
+<link rel="stylesheet" href="Main.css?ver=1">
 <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="function.js"></script>
 <%@page import="se.Member" %>
@@ -30,12 +30,11 @@
        
             </div>
 
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
 			  <ul class="nav navbar-nav">
 				<li class="active"><a href="after_login_managerMain.jsp">Home</a></li>
 				<li><a href="show_member.jsp">회원조회</a></li>
 				<li><a href="regist_member.jsp">회원등록</a></li>
-				<li><a href="modify_member.jsp">회원수정</a></li>
 				<li><a href="manage_scholarship.jsp">장학관리</a></li>
 				<li><a onclick="logout()" style="cursor:pointer">로그아웃</a></li>
 			  </ul>
@@ -43,14 +42,11 @@
          
         </div>
     </nav>
-		
+			<img src="./cnu.jpg" class="back back2">
 	<div class="show_box">
 		<h2>회원 전체 조회</h2>
 		<table class="myinformation" >
 			<tr>
-				<th>
-					선택
-				</th>
 				<th>
 					아이디
 				</th>
@@ -59,6 +55,9 @@
 				</th>
 				<th>
 					주소
+				</th>
+				<th>
+					전화번호
 				</th>
 				<th>
 					휴/복여부
@@ -73,9 +72,6 @@
 			%>
 			<tr>
 				<td>
-					<input type ="button" value ="삭제" onClick="location.href='delete_member.jsp?id=<%=rs.getString("id") %>'">
-				</td>
-				<td>
 					<%=rs.getString("id")%> 
 				</td>
 				<td>
@@ -83,6 +79,9 @@
 				</td>
 				<td>
 					<%=rs.getString("address")%> 
+				</td>
+				<td>
+					<%=rs.getString("phone")%> 
 				</td>
 				<td>
 					<%
@@ -112,9 +111,7 @@
 					 %>
 				</td>
 				<td>
-				<% if(autority_value == 0 ){ %>
-						관리자
-						<%} else if(autority_value == 1 ){
+					<%  if(autority_value == 1 ){
 							%> 학생
 						<% }
 						else if( autority_value == 2 ){

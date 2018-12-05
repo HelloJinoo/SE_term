@@ -6,8 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<link rel="stylesheet" href="Main.css">
+<link rel="stylesheet" href="Main.css?ver=1">
 <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="function.js"></script>
 
@@ -52,7 +51,7 @@
          
         </div>
     </nav>
-    
+    <img src="./cnu.jpg" class="back back2">
     <div class="show_box">
 		<table class="myinformation" >
 				<tr>
@@ -84,7 +83,8 @@
 				</tr>
 		<% 
 		while(rs.next()){
-			
+			String subject_number = rs.getString("subject_number");
+			int count = s.find_applycount(subject_number);
 	%>
 			<tr>
 
@@ -101,7 +101,7 @@
 				<%= rs.getString("grade")%>
 				</td>
 				<td>
-				 <%= rs.getString("personnel")%>
+				 <%=count %> / <%= rs.getString("personnel")%>
 				</td>
 				<td>
 				<%= rs.getString("time")%>

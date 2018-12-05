@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <%@ page import ="se.Member,com.mysql.jdbc.Connection" %>
-  <link rel="stylesheet" href="Main.css">
+<link rel="stylesheet" href="Main.css?ver=1">
    <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="function.js"></script>
 <title>Insert title here</title>
@@ -47,7 +47,7 @@
          
         </div>
     </nav>
-    
+    <img src="./cnu.jpg" class="back back2">
     <div class="show_box">
 	<form action = "modify_information.jsp" method ="post">
 		<table class="myinformation" >
@@ -62,6 +62,9 @@
 					주소
 				</th>
 				<th>
+					전화번호
+				</th>
+				<th>
 					휴/복여부
 				</th>
 			</tr>
@@ -74,6 +77,10 @@
 				</td>
 				<td>
 					<input type="text" id="information_addr" name="addr" value=<%=rs.getString("address")%> >
+					
+				</td>
+				<td>
+					<input type="text"  name="phone" value=<%=rs.getString("phone")%> >
 				</td>
 				<td>
 					<%

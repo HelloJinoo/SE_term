@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="Main.css">
+<link rel="stylesheet" href="Main.css?ver=1">
 <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
 <%@page import="se.Subject" %>
 <%@page import="se.Member" %>
@@ -21,7 +21,7 @@
 		Member m = new Member();
 		Grade g = new Grade();
 		
-		ResultSet rs = m.apply_student(subject_number);
+		ResultSet rs = m.course_student(subject_number);
 
 		if(rs.next()){
 			rs.previous();
@@ -51,7 +51,7 @@
          
         </div>
     </nav>
-    
+    <img src="./cnu.jpg" class="back back2">
     <div class="show_box">
 		<form action ="give_grades2.jsp">
 		<table class="myinformation" >

@@ -26,13 +26,13 @@ public class Grade {
 			String id = sp[0];
 			String grade = sp[1];
 			int score=0;
-			sql = "update apply set grade = ? where subject_number = ? && id = ?";
+			sql = "update course set grade = ? where subject_number = ? && id = ?";
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
 			pstmt.setString(1, grade);
 			pstmt.setString(2, subject_number);
 			pstmt.setString(3, id);
 			int result = pstmt.executeUpdate();	
-			sql = "update apply set score = ? where subject_number = ? && id = ?";
+			sql = "update course set score = ? where subject_number = ? && id = ?";
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
 			if( grade.equals("A")){
 				score = 4;
@@ -67,7 +67,7 @@ public class Grade {
 	/*학생 - 성적확인 */
 	public ResultSet check_grade(String id) throws Exception{
 		conn = getConnection();
-		sql = "select s.subject_number, s.subject_name , s.grade , a.grade , a.score from subject s , apply a where a.id = ? && a.subject_number = s.subject_number;";
+		sql = "select s.subject_number, s.subject_name , s.grade , a.grade , a.score from subject s , course a where a.id = ? && a.subject_number = s.subject_number;";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 	
@@ -83,7 +83,7 @@ public class Grade {
 	}
 
 	public Connection getConnection() throws Exception{
-		String jdbcUrl = "jdbc:mysql://localhost:3306/se_term";
+		String jdbcUrl = "jdbc:mysql://localhost:3306/se_term?useUnicode=true&characterEncoding=utf8";
 		Class.forName("com.mysql.jdbc.Driver");
 		conn = (Connection) DriverManager.getConnection(jdbcUrl, "root", "asdasd1");
 		return conn;

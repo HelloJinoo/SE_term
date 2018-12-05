@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <%@ page import ="se.Subject" %>
 <%request.setCharacterEncoding("utf-8"); %>
-<link rel="stylesheet" href="Main.css">
+<link rel="stylesheet" href="Main.css?ver=1">
 <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="function.js"></script>
 <%@page import="java.sql.ResultSet" %> 
@@ -50,7 +50,7 @@
          
         </div>
     </nav>
-    
+    <img src="./cnu.jpg" class="back back2">
     <div class= "show_box">
 		<table class="myinformation" >
 				<tr>

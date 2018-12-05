@@ -18,11 +18,11 @@
 		String addr = request.getParameter("addr");
 		String current = request.getParameter("current");
 		String authority = request.getParameter("authority");
-		id = URLEncoder.encode(id, "utf-8");
-		addr = URLEncoder.encode(addr, "utf-8");
+		String phone = request.getParameter("phone");
+	
 		Member m = new Member();
 		if(!m.check(id)){
-			boolean result =m.regist_member(id, pwd, addr, Integer.parseInt(current), Integer.parseInt(authority));
+			boolean result =m.regist_member(id, pwd, addr,phone,Integer.parseInt(current), Integer.parseInt(authority));
 			if( result == true){
 				%>
 				<script>
@@ -34,7 +34,7 @@
 				%>
 				<script>
 				alert("회원 등록 실패");
-				location.href="after_login_managerMain.jsp";
+				location.href="regist_member.jsp";
 				</script>
 				<%
 			}
@@ -43,7 +43,7 @@
 			%>
 			<script>
 			alert("회원 등록된 아이디입니다.");
-			location.href="after_login_managerMain.jsp";
+			location.href="regist_member.jsp";
 			</script>
 			<%
 		}

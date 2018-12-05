@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <%@page import="se.Grade" %>
   <%@page import="java.sql.ResultSet" %>  
-  <link rel="stylesheet" href="Main.css">
+ <link rel="stylesheet" href="Main.css?ver=1">
    <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
    <script src="function.js"></script>
 
@@ -51,7 +51,7 @@
          
         </div>
     </nav>
-    
+    <img src="./cnu.jpg" class="back back2">
     <div class="show_box">
 		<table class="myinformation" >
 				<tr>

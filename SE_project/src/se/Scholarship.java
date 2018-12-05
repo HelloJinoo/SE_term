@@ -21,7 +21,7 @@ public class Scholarship {
 	/*관리자 - 전체 학생의 성적 보여주기*/
 	public ResultSet manage_scholarship() throws Exception{
 		conn = getConnection();
-		sql ="select id,sum(score) , count(*) from apply where score !=0 order by sum(score)";
+		sql ="select id,sum(score)/count(*) from course group by id order by sum(score)/count(*)";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 		if( rs.next() ){
@@ -70,7 +70,7 @@ public class Scholarship {
 	}
 	
 	public Connection getConnection() throws Exception{
-		String jdbcUrl = "jdbc:mysql://localhost:3306/se_term";
+		String jdbcUrl = "jdbc:mysql://localhost:3306/se_term?useUnicode=true&characterEncoding=utf8";
 		Class.forName("com.mysql.jdbc.Driver");
 		conn = (Connection) DriverManager.getConnection(jdbcUrl, "root", "asdasd1");
 		return conn;

@@ -8,7 +8,7 @@
 <%@page import="se.Graduate" %>
 <%@page import="se.Subject" %>
  <%@page import="java.sql.ResultSet" %>  
- <link rel="stylesheet" href="Main.css">
+<link rel="stylesheet" href="Main.css?ver=1">
   <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="function.js"></script>
 <%request.setCharacterEncoding("utf-8"); %>
@@ -52,7 +52,7 @@
          
         </div>
     </nav>
-    
+    <img src="./cnu.jpg" class="back back2">
     <div class="show_box">
 		<h2>수강 내역 (F학점 , 성적입력되지 않은 과목은 총 이수학점에 포함x)</h2>
 		<table class="myinformation" >

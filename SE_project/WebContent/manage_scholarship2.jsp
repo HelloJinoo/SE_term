@@ -36,7 +36,7 @@
 				%>
 					<script>
 					alert("장학여부 등록에 실패하였습니다.");
-					location.href="after_login_managerMain.jsp";
+					location.href="manage_scholarship.jsp";
 					</script>
 				<% 
 			}

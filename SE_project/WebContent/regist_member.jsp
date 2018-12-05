@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="Main.css">
+<link rel="stylesheet" href="Main.css?ver=1">
 <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="function.js"></script>
 <%request.setCharacterEncoding("utf-8"); %>
@@ -30,7 +30,6 @@
 				<li class="active"><a href="after_login_managerMain.jsp">Home</a></li>
 				<li><a href="show_member.jsp">회원조회</a></li>
 				<li><a href="regist_member.jsp">회원등록</a></li>
-				<li><a href="modify_member.jsp">회원수정</a></li>
 				<li><a href="manage_scholarship.jsp">장학관리</a></li>
 				<li><a onclick="logout()" style="cursor:pointer">로그아웃</a></li>
 			  </ul>
@@ -38,7 +37,7 @@
          
         </div>
     </nav>
-			
+			<img src="./cnu.jpg" class="back back2">
 		<div class="show_box">
 				<form action="regist_member2.jsp" method="post">
 					<table class="myinformation">
@@ -64,6 +63,14 @@
 							</td>
 							<td>
 								<input type="text" name="addr" required>
+							</td>
+						</tr>
+						<tr>
+						<td>
+								전화번호
+							</td>
+							<td>
+								<input type="text" name="phone" required pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" title="ex)010-1111-2222">
 							</td>
 						</tr>
 						<tr>

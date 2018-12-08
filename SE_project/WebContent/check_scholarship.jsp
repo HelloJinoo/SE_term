@@ -17,33 +17,36 @@
 		
 		if(rs.next()){
 			String kind = rs.getString("scholarship_kind");	
-			if(kind.equals("total")){
-				%>
-					<script>
-					alert("전액장학금입니다.");
-					</script>
-				<% 
-			}
-			else if(kind.equals("portion") ){
-				%>
+			
+			if(kind.equals("전액장학금")){
+			%>
 				<script>
-				alert("부분(50%) 장학금입니다.");
+					alert("전액장학금입니다.");
 				</script>
 			<% 
-			}
-			else{%>
-				<script>
-				alert("장학금대상에 선택되지않습니다.");
-				</script>
-			<% 	
-			}
+				}
+				else if(kind.equals("부분장학금")){
+						%>
+						<script>
+							alert("부분장학금입니다.");
+						</script>
+						<% 
+					}
+				else{
+					%>
+					<script>
+					alert("장학금이 없습니다.");
+					</script>
+					<% 	
+				}
 		}
 		else{
 			%>
-			<script>
-			alert("장학금등록이 되어있지않습니다.");
-			</script>
-			<% 	
+				<script>
+					alert("아직 등록되어있지 않습니다.");
+				</script>
+				
+			<% 
 		}
 		%>
 			

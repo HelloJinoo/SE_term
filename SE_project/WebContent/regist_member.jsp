@@ -46,7 +46,7 @@
 								ID
 							</td>
 							<td>
-								<input type="text" name="id"  required>
+								<input type="text" name="id"  maxlength="9" minlength="9" required>
 							</td>
 						</tr>
 						<tr>
@@ -54,7 +54,7 @@
 								비밀번호
 							</td>
 							<td>
-								<input type="password" name="pwd" required>
+								<input type="password" name="pwd" minlength="6" maxlength="10"required>
 							</td>
 						</tr>
 					  <tr>

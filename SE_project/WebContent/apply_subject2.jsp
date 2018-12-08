@@ -15,7 +15,7 @@
 		String sub_number = request.getParameter("subject_num");
 		
 		Subject s = new Subject();
-		if((int)session.getAttribute("current") ==1 ){
+		if((int)session.getAttribute("current") == 1 ){
 		boolean result = s.course_subject(id, sub_number);
 		if( result == true){
 			%>

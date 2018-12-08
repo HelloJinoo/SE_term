@@ -17,6 +17,7 @@
 		String addr = request.getParameter("addr");
 		String phone = request.getParameter("phone");
 		String curr = request.getParameter("current");
+		session.setAttribute("current", Integer.parseInt(curr));
 		int result = m.modify_information(id, pwd, addr,phone, curr);
 		if(result == 0){
 			%>

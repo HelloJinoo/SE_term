@@ -16,6 +16,25 @@ public class Subject {
 	public Subject(){
 		
 	}
+	/*강의등록시 시간 겹침확인*/
+	public boolean check_time(String t) throws Exception{
+		String time[] = t.split("~");
+		String subject_number = "18-"+(find_subjectcount()+1);
+		conn = getConnection();
+		sql = "select * from subject where time between ? and ?";
+		pstmt = (PreparedStatement) conn.prepareStatement(sql);
+		pstmt.setString(1, time[0]);
+		pstmt.setString(2, time[1]);
+		
+		rs = pstmt.executeQuery();
+		if(rs.next()){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
 	/*전체 - 수강편람 조회*/
 	public ResultSet show_Allsubject() throws Exception{
 		conn = getConnection();
@@ -34,17 +53,19 @@ public class Subject {
 	/*교수 - 강의 등록*/
 	public boolean regist_subject(String id ,String subejct_name , String professor_name ,int grade, int personnel,String time, String day , String place) throws Exception{
 		String subject_number = "18-"+(find_subjectcount()+1);
+		String t[] = time.split("~");
 		conn = getConnection();
-		sql = "insert into subject values(?,?,?,?,?,?,?,?)";
+		sql = "insert into subject values(?,?,?,?,?,?,?,?,?)";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, subject_number);
 		pstmt.setString(2, subejct_name);
 		pstmt.setString(3, professor_name);
-		pstmt.setString(4, time);
-		pstmt.setString(5, day);
-		pstmt.setInt(6, grade);
-		pstmt.setString(7, place);
-		pstmt.setInt(8,personnel);
+		pstmt.setString(4, t[0]);
+		pstmt.setString(5, t[1]);
+		pstmt.setString(6, day);
+		pstmt.setInt(7, grade);
+		pstmt.setString(8, place);
+		pstmt.setInt(9,personnel);
 		int result = pstmt.executeUpdate();
 		
 		
@@ -116,12 +137,16 @@ public class Subject {
 	}
 	/*강의실 등록가능여부 */
 	public boolean check_room(String time,String day, String place) throws Exception{
+		String t[] = time.split("~");
 		conn = getConnection();
-		sql = "select * from subject where time = ? && day = ? && place = ?";
+		sql = "select * from subject where ( ? > start_time and ? < end_time or ? > start_time and ? < end_time) && day = ? && place =?;";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
-		pstmt.setString(1, time);
-		pstmt.setString(2, day);
-		pstmt.setString(3,place);
+		pstmt.setString(1, t[0]);
+		pstmt.setString(2, t[0]);
+		pstmt.setString(3, t[1]);
+		pstmt.setString(4, t[1]);
+		pstmt.setString(5, day);
+		pstmt.setString(6,place);
 		rs = pstmt.executeQuery();
 		if(rs.next()){
 			return true;

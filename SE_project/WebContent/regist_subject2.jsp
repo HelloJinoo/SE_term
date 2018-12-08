@@ -19,7 +19,7 @@
 		String place= request.getParameter("place");
 		String personnel = request.getParameter("personnel");
 		Subject s = new Subject();
-		if(!s.check_room(time,day,place)){
+		if(!s.check_room(time , day,place)){
 			boolean result = s.regist_subject(id,sub_name, pro_name, Integer.parseInt(grade), Integer.parseInt(personnel),time, day, place);
 			if( result == true){
 				%>

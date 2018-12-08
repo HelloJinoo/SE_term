@@ -19,13 +19,19 @@ public class Scholarship {
 	}
 	
 	/*관리자 - 전체 학생의 성적 보여주기*/
-	public ResultSet manage_scholarship() throws Exception{
+	public ResultSet[] manage_scholarship() throws Exception{
+		ResultSet[] rs = new ResultSet[2];
 		conn = getConnection();
-		sql ="select id,sum(score)/count(*) from course group by id order by sum(score)/count(*)";
+		sql ="select id,sum(score)/count(*) , count(*) from course group by id order by sum(score)/count(*) desc";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
-		rs = pstmt.executeQuery();
-		if( rs.next() ){
-			rs.previous();
+		rs[0] = pstmt.executeQuery();
+		
+		sql = "select count(c.id) from (select id,sum(score)/count(*) from course group by id order by sum(score)/count(*) desc) as c";
+		pstmt = (PreparedStatement) conn.prepareStatement(sql);
+		rs[1] = pstmt.executeQuery();
+		
+		if( rs[0].next() ){
+			rs[0].previous();
 			return rs;
 		}
 		else{
@@ -34,9 +40,16 @@ public class Scholarship {
 		
 	}
 	
-	/*관리자 - 전체 학생의 성적부여*/
-	public boolean give_scholarship(String id , String kind) throws Exception{
+	public void trunc_scholarship() throws Exception{
 		conn = getConnection();
+		sql = "truncate scholarship";
+		pstmt = (PreparedStatement) conn.prepareStatement(sql);
+		pstmt.executeUpdate();
+	}
+	
+	/*관리자 - 전체 학생의 장학등록*/
+	public boolean give_scholarship(String id , String kind) throws Exception{
+
 		sql ="insert into scholarship values(? , ?)";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, id);

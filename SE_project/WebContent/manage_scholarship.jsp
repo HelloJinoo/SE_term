@@ -15,9 +15,13 @@
 <body>
 	<%
 		Scholarship s = new Scholarship();
-		ResultSet rs = s.manage_scholarship();
-		if(rs.next()){
-			rs.previous();
+		ResultSet[] rs = s.manage_scholarship();
+		float i=0;
+	
+		if(rs[0].next()){
+			
+			rs[0].previous();
+			
 		%>
 		
 		<nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
@@ -62,25 +66,44 @@
 					</th>
 				</tr>
 		<% 
-		while(rs.next()){
-				String a= rs.getString("sum(score)/count(*)");
-				float total_subject = Float.parseFloat(rs.getString("sum(score)/count(*)"));
+
+		int total_count=0;
+		while(rs[1].next()){
+			total_count = Integer.parseInt( rs[1].getString("count(c.id)") );
+		}
+		
+		while(rs[0].next()){
+		
+	
+				float total_subject = Float.parseFloat(rs[0].getString("sum(score)/count(*)"));
 				String total_grade = String.format("%.2f", total_subject) ;
 				
+			
 	%>
 			<tr>
 				<td>
-					<%=rs.getString("id")%>
+					<%=rs[0].getString("id")%>
 				</td>
 				<td>
 					<%=total_grade%>
 				</td>
 				<td>
-							<select name ="kind">
-								<option value="<%=rs.getString("id")%>,total">전액장학금</option>
-								<option value="<%=rs.getString("id")%>,portion">부분장학금</option>
-								<option value="<%=rs.getString("id")%>,no">장학금x</option>
-							</select>
+				
+				<%
+				String kind="";
+					if( i/total_count <= 0.1 ){
+						kind = "전액장학금";
+					}
+					else if( i/total_count <= 0.3 ){
+						kind = "부분장학금";
+					}else{
+						kind = "장학금이 없습니다.";
+					}
+					i++;
+				%>
+				<%=kind %>
+				
+					<input  type="hidden" name="kind" value="<%=rs[0].getString("id")%>,<%=kind %>"/>
 				</td>
 				
 				

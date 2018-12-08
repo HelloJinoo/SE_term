@@ -14,7 +14,7 @@
 			int flag =0;
 			Scholarship s = new Scholarship();
 			String value[] = request.getParameterValues("kind");
-			
+			s.trunc_scholarship();
 			for(int i=0; i<value.length; i++){
 				String values[] = value[i].split(",");
 				String id = values[0];

@@ -94,7 +94,7 @@
 					<%=rs.getString("professor_name")%> 
 				</td>
 				<td>
-					<%=rs.getString("time")%> 
+					<%= rs.getString("start_time")%>~<%= rs.getString("end_time")%>
 				</td>
 				<td>
 					<%=rs.getString("day")%> 

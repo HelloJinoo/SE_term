@@ -13,7 +13,7 @@ public class Grade {
 	ResultSet rs = null;
 	String sql ="";
 	int score=0;
-	String id="";
+	
 	String grade="";
 	
 	public Grade(){
@@ -26,38 +26,35 @@ public class Grade {
 		int flag = 0;
 		for(int i=0; i< value.length; i++){
 			String sp[] = value[i].split(",");
-			 id = sp[0];
+			 String id = sp[0];
 			 grade = sp[1];
 			
-			sql = "update course set grade = ? where subject_number = ? && id = ?";
+			 if( grade.equals("A")){
+					score = 4;
+				}
+				else if(grade.equals("B") ){
+					score = 3;
+				}
+				else if(grade.equals("C")){
+					score = 2;
+				}
+				else if(grade.equals("D")){
+					score = 1;
+				}
+			 
+			sql = "update course set grade = ? ,  score =? where subject_number = ? && id = ?";
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
 			pstmt.setString(1, grade);
-			pstmt.setString(2, subject_number);
-			pstmt.setString(3, id);
+			pstmt.setInt(2, score);
+			pstmt.setString(3, subject_number);
+			pstmt.setString(4, id);
+			
 			int result = pstmt.executeUpdate();	
-			sql = "update course set score = ? where subject_number = ? && id = ?";
-			pstmt = (PreparedStatement) conn.prepareStatement(sql);
-			if( grade.equals("A")){
-				score = 4;
-			}
-			else if(grade.equals("B") ){
-				score = 3;
-			}
-			else if(grade.equals("C")){
-				score = 2;
-			}
-			else if(grade.equals("D")){
-				score = 1;
-			}
-			pstmt.setInt(1, score);
-			pstmt.setString(2, subject_number);
-			pstmt.setString(3, id);
-			result = pstmt.executeUpdate();
 			if(result == 1){
 				flag =1;
 			}
 		}
-		
+
 		if(flag ==1){
 			return true;
 		}

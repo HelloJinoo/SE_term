@@ -13,7 +13,7 @@ public class Scholarship {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	String sql ="";
-	
+	String scholarship_type="";
 	public Scholarship(){
 		
 	}
@@ -40,17 +40,11 @@ public class Scholarship {
 		
 	}
 	
-	public void trunc_scholarship() throws Exception{
-		conn = getConnection();
-		sql = "truncate scholarship";
-		pstmt = (PreparedStatement) conn.prepareStatement(sql);
-		pstmt.executeUpdate();
-	}
 	
 	/*관리자 - 전체 학생의 장학등록*/
 	public boolean give_scholarship(String id , String kind) throws Exception{
 
-		sql ="insert into scholarship values(? , ?)";
+		sql ="update scholarship set id=? , scholarship_kind =?";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		pstmt.setString(2, kind);
@@ -65,18 +59,18 @@ public class Scholarship {
 	}
 	
 	/*학생 - 장학여부 확인*/
-	public ResultSet check_scholarship(String id) throws Exception{
+	public String check_scholarship(String id) throws Exception{
 		conn = getConnection();
 		sql ="select * from scholarship where id =?";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		 rs = pstmt.executeQuery();
 		if( rs.next()){
-			rs.previous();
-			return rs;
+			 scholarship_type = rs.getString("scholarship_kind");
+			return scholarship_type;
 		}
 		else{
-			return rs;
+			return scholarship_type;
 		}
 		
 		

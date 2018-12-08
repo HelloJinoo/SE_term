@@ -12,14 +12,13 @@ public class Graduate{
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	String sql ="";
-	
-	
+	int total_grade=0;
 	public Graduate(){
 		
 	}
 	
 	/* 학생 - 졸업자가진단*/
-	public ResultSet subject_totalcount(String id) throws Exception{
+	public int graduation_diagnosis(String id) throws Exception{
 		
 		conn = getConnection();
 		sql = "select count(*) from subject , course where course.id = ? && course.subject_number = subject.subject_number && course.score !='0' ";
@@ -27,10 +26,11 @@ public class Graduate{
 		pstmt.setString(1, id);
 		rs = pstmt.executeQuery();
 		if(rs.next()){
-			return rs;
+			total_grade = Integer.parseInt(rs.getString("count(*)"));
+			return total_grade;
 		}
 		else{
-			return rs;
+			return total_grade;
 		}
 		
 	}

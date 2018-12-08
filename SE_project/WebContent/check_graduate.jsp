@@ -20,7 +20,7 @@
 			Subject s = new Subject();
 			String id = (String)session.getAttribute("id");
 			ResultSet rs = s.view_timetable(id);
-			ResultSet count = g.subject_totalcount(id);
+			int count = g.graduation_diagnosis(id);
 		%>
 		
 		<nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
@@ -111,11 +111,11 @@
 			
 		</table>
 		
-		<%	int mytotal_grade = (Integer.parseInt(count.getString("count(*)") )*3); %>
-				<h3>현재 총 이수학점 : <%=mytotal_grade%> <br/> 졸업가능 학점 : <%=graduate_count%><h3>
+		<%	int total_grade = count*3; %>
+				<h3>현재 총 이수학점 : <%=total_grade%> <br/> 졸업가능 학점 : <%=graduate_count%><h3>
 		<%
 	
-				if(graduate_count < mytotal_grade ){
+				if(graduate_count < total_grade ){
 					%>
 						<h2>졸업 가능</h2>
 						

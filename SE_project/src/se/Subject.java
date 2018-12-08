@@ -51,7 +51,7 @@ public class Subject {
 	
 	
 	/*교수 - 강의 등록*/
-	public boolean regist_subject(String id ,String subejct_name , String professor_name ,int grade, int personnel,String time, String day , String place) throws Exception{
+	public boolean regist_subject(String subejct_name , String professor_name ,int grade, int personnel,String time, String day , String place) throws Exception{
 		String subject_number = "18-"+(find_subjectcount()+1);
 		String t[] = time.split("~");
 		conn = getConnection();

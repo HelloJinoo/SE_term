@@ -13,19 +13,18 @@
 	<% 
 		Scholarship s = new Scholarship();
 		String id = (String)session.getAttribute("id");
-		ResultSet rs = s.check_scholarship(id);
+		String rs = s.check_scholarship(id);
 		
-		if(rs.next()){
-			String kind = rs.getString("scholarship_kind");	
+		if(!rs.equals("")){
 			
-			if(kind.equals("전액장학금")){
+			if(rs.equals("전액장학금")){
 			%>
 				<script>
 					alert("전액장학금입니다.");
 				</script>
 			<% 
 				}
-				else if(kind.equals("부분장학금")){
+				else if(rs.equals("부분장학금")){
 						%>
 						<script>
 							alert("부분장학금입니다.");

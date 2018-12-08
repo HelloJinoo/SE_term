@@ -12,6 +12,9 @@ public class Grade {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	String sql ="";
+	int score=0;
+	String id="";
+	String grade="";
 	
 	public Grade(){
 		
@@ -23,9 +26,9 @@ public class Grade {
 		int flag = 0;
 		for(int i=0; i< value.length; i++){
 			String sp[] = value[i].split(",");
-			String id = sp[0];
-			String grade = sp[1];
-			int score=0;
+			 id = sp[0];
+			 grade = sp[1];
+			
 			sql = "update course set grade = ? where subject_number = ? && id = ?";
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
 			pstmt.setString(1, grade);

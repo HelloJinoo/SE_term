@@ -20,7 +20,7 @@
 			%>
 				<script>	
 					alert("수강취소 되었습니다.");
-					location.href="cancel_subject.jsp";
+					location.href="view_timetable.jsp";
 				</script>
 			<% 
 		}
@@ -28,7 +28,7 @@
 			%>
 			<script>	
 					alert("수강취소가 실패되었습니다.");
-					location.href="cancel_subject.jsp";
+					location.href="view_timetable.jsp";
 				</script>
 			<% 
 		}

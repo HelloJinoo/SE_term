@@ -12,14 +12,6 @@ import com.mysql.jdbc.PreparedStatement;
 
 public class Member {
 
-	private String id;
-	private String password;
-	private String address;
-	private String phone;
-	private int currnet;
-	private int authority;
-	
-
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -28,14 +20,7 @@ public class Member {
 	public Member(){
 		
 	}
-	public Member( String id, String password,String address, String phone, int currnet, int authority){
-		this.id =id;
-		this.password = password;
-		this.address = address;
-		this.phone = phone;
-		this.currnet = currnet;
-		this.authority = authority;
-	}
+	
 	
 	/*회원 - 개인정보조회*/
 	public ResultSet show_myinformation(String id) throws Exception{
@@ -145,7 +130,7 @@ public class Member {
 	/* 교수 - 강의신청한 학생보기*/
 	public ResultSet course_student(String subject_number) throws Exception{
 		conn = getConnection();
-		sql = "select member.id , subject.subject_name from member ,course , subject where course.subject_number = ? && subject.subject_number = course.subject_number  && member.id = course.id";
+		sql = "select member.id , subject.subject_name , course.grade from member ,course , subject where course.subject_number = ? && subject.subject_number = course.subject_number  && member.id = course.id";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, subject_number);
 		rs = pstmt.executeQuery();

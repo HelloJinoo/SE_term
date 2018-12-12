@@ -115,7 +115,7 @@
 				<h3>현재 총 이수학점 : <%=total_grade%> <br/> 졸업가능 학점 : <%=graduate_count%><h3>
 		<%
 	
-				if(graduate_count < total_grade ){
+				if(graduate_count <= total_grade ){
 					%>
 						<h2>졸업 가능</h2>
 						

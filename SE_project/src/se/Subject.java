@@ -97,8 +97,8 @@ public class Subject {
 		return apply_result;
 	}
 	/*학생 - 강의신청*/
-	public boolean course_subject(String id , String subject_num) throws Exception{
-		if(!check_mysubject(id, subject_num)){
+	public boolean course_subject(String id , String subject_num,String subject_name) throws Exception{
+		if(!check_mysubject(id, subject_num,subject_name)){
 			if(find_applycount(subject_num) < total_countSubject(subject_num) ){
 			conn = getConnection();
 			sql = "insert into course values(?,?,?,?)";
@@ -121,12 +121,13 @@ public class Subject {
 	}
 	
 	/*신청 강의가 있는지 확인*/
-	private boolean check_mysubject(String id , String subject_num) throws Exception{
+	private boolean check_mysubject(String id , String subject_num,String subject_name) throws Exception{
 		conn = getConnection();
-		sql = "select * from course where id =? && subject_number = ?";
+		sql = "select * from course where id =? && ( subject_number = ? || subject_name = ?)";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		pstmt.setString(2, subject_num);
+		pstmt.setString(3, subject_name);
 		rs = pstmt.executeQuery();
 		if( rs.next()){
 			return true;

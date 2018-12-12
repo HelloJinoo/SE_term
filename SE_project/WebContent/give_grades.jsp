@@ -73,11 +73,61 @@
 				</td>
 				<td>
 					<select name ="grade" style="width:80px">
-								<option value="<%= rs.getString("id") %>,A">A</option>
-								<option value="<%= rs.getString("id") %>,B" >B</option>
+							<% if( rs.getString("course.grade").equals("A")){
+								
+							   %> 
+							   <option value="<%= rs.getString("id") %>,A">A</option>
+								<option value="<%= rs.getString("id") %>,B">B</option>
 								<option value="<%= rs.getString("id") %>,C">C</option>
 								<option value="<%= rs.getString("id") %>,D">D</option>
 								<option value="<%= rs.getString("id") %>,F">F</option>
+							   <%
+							}else if( rs.getString("course.grade").equals("B")){
+								  %> 
+								   <option value="<%= rs.getString("id") %>,B">B</option>
+									<option value="<%= rs.getString("id") %>,A">A</option>
+									<option value="<%= rs.getString("id") %>,C">C</option>
+									<option value="<%= rs.getString("id") %>,D">D</option>
+									<option value="<%= rs.getString("id") %>,F">F</option>
+								   <%
+							}
+							else if(rs.getString("course.grade").equals("C") ){
+								%> 
+								   <option value="<%= rs.getString("id") %>,C">C</option>
+									<option value="<%= rs.getString("id") %>,A">A</option>
+									<option value="<%= rs.getString("id") %>,B">B</option>
+									<option value="<%= rs.getString("id") %>,D">D</option>
+									<option value="<%= rs.getString("id") %>,F">F</option>
+								   <%
+							}else if(rs.getString("course.grade").equals("D") ){
+								%> 
+								   <option value="<%= rs.getString("id") %>,D">D</option>
+									<option value="<%= rs.getString("id") %>,A">A</option>
+									<option value="<%= rs.getString("id") %>,B">B</option>
+									<option value="<%= rs.getString("id") %>,C">C</option>
+									<option value="<%= rs.getString("id") %>,F">F</option>
+								   <%
+							}else if( rs.getString("grade").equals("F")){
+								%> 
+								   <option value="<%= rs.getString("id") %>,F">F</option>
+									<option value="<%= rs.getString("id") %>,A">A</option>
+									<option value="<%= rs.getString("id") %>,B">B</option>
+									<option value="<%= rs.getString("id") %>,C">C</option>
+									<option value="<%= rs.getString("id") %>,D">D</option>
+								   <%
+							}else{
+								%> 
+								   <option value="<%= rs.getString("id") %>,-">-</option>
+									<option value="<%= rs.getString("id") %>,A">A</option>
+									<option value="<%= rs.getString("id") %>,B">B</option>
+									<option value="<%= rs.getString("id") %>,C">C</option>
+									<option value="<%= rs.getString("id") %>,D">D</option>
+									<option value="<%= rs.getString("id") %>,D">F</option>
+								   <%
+							}
+							
+							%>
+								
 					</select>
 				</td>
 			</tr>

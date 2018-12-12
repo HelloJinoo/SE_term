@@ -76,7 +76,7 @@
 					<input type="password" name="pwd" value= <%=rs.getString("password") %> >
 				</td>
 				<td>
-					<input type="text" id="information_addr" name="addr" value=<%=rs.getString("address")%> >
+					<input type="text" id="information_addr" name="addr" value="<%=rs.getString("address")%>" >
 					
 				</td>
 				<td>

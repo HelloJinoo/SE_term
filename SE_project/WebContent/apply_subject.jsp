@@ -21,10 +21,10 @@
 			rs.previous();
 		%>
 		
-			<nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
-			<div class="login_container">
+		<nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
+		<div class="login_container">
 					<p class="bold text-right log" > <%=(String)session.getAttribute("id")%> 로그인하셨습니다.</p>
-			</div>
+		</div>
 
         <div class="container navigation">
             <div class="navbar-header page-scroll">
@@ -82,13 +82,20 @@
 						장소
 					</th>
 				</tr>
+				
 		<% 
 		while(rs.next()){
 			
 	%>
+	
 			<tr>
 				<td>
-					<input type ="button" value ="신청" onClick="location.href='apply_subject2.jsp?subject_num=<%=rs.getString("subject_number")%>'">
+					<form action="apply_subject2.jsp">
+						<input type="hidden" name="subject_number" value="<%=rs.getString("subject_number") %>">
+						<input type="hidden" name="subject_name" value="<%=rs.getString("subject_name") %>">
+						<input type="submit" value="신청">
+					</form>
+				
 				</td>
 				<td>
 				<%=  rs.getString("subject_number")%>

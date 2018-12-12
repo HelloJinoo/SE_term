@@ -12,3 +12,19 @@ function input(){
 	
 	
 }
+
+function check_length(){
+	var id = document.getElementsByid("input_id");
+	var current = document.getElementsByid("input_current");
+	
+	if(current == 1){
+		if(id.length() !=9 ){
+			alert("학생 아이디(학번)는 9자리여야합니다.");
+		}
+	}else{
+		if(id.length() != 3){
+			alert("교수 아이디(이름)은 3자리여야합니다.");
+		}
+	}
+	
+}

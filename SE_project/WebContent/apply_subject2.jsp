@@ -10,13 +10,13 @@
 </head>
 <body>
 	<%
-	
 		String id= (String)session.getAttribute("id");
-		String sub_number = request.getParameter("subject_num");
+		String sub_number = request.getParameter("subject_number");
+		String sub_name = request.getParameter("subject_name");
 		
 		Subject s = new Subject();
 		if((int)session.getAttribute("current") == 1 ){
-		boolean result = s.course_subject(id, sub_number);
+		boolean result = s.course_subject(id, sub_number , sub_name);
 		if( result == true){
 			%>
 				<script>	

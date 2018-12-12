@@ -19,7 +19,24 @@ public class Grade {
 	public Grade(){
 		
 	}
+	/*학생의 성적이 있으면 가져오기*/
+	public ResultSet read_grade(String subject_number) throws Exception{
+		conn = getConnection();
+		sql = "select id , grade ,score from course where subject_number = ?";
+		pstmt = (PreparedStatement) conn.prepareStatement(sql);
+		pstmt.setString(1, subject_number);
 	
+		rs = pstmt.executeQuery();
+		if( rs.next()){
+			rs.previous();
+			return rs;
+		}
+		else{
+			return rs;
+		}
+
+		
+	}
 	/*교수 - 성적부여*/
 	public boolean give_grade(String value[], String subject_number) throws Exception{
 		conn = getConnection();

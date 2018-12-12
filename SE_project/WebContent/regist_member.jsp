@@ -46,7 +46,7 @@
 								ID
 							</td>
 							<td>
-								<input type="text" name="id"  maxlength="9" minlength="9" required>
+								<input id="input_id" type="text" name="id" minlength="3" maxlength="9" required>
 							</td>
 						</tr>
 						<tr>
@@ -86,11 +86,11 @@
 								권한(학생:1 / 교수:2)
 							</td>
 							<td>
-								<input type="number" name="authority" max="2" min="1" required>
+								<input id="input_current" type="number" name="authority" max="2" min="1" required>
 							</td>
 						</tr>
 					</table>
-						<input type="submit" value="회원등록">
+						<input type="submit" value="회원등록" onclick="check_length()">
 				</form>
 		</div>
 </body>

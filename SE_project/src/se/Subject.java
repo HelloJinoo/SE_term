@@ -122,7 +122,7 @@ public class Subject {
 	public boolean check_room(String time,String day, String place) throws Exception{
 		String t[] = time.split("~");
 		conn = getConnection();
-		sql = "select * from subject where ( (? > start_time and ? < end_time) or (? > start_time and ? < end_time) or ( ? < start_time && end_time < ?)  )&& day = ? && place =?;";
+		sql = "select * from subject where ( (? > start_time and ? < end_time) or (? > start_time and ? < end_time) or ( ? < start_time && end_time < ?) ) && day = ? && place =?;";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, t[0]);
 		pstmt.setString(2, t[0]);

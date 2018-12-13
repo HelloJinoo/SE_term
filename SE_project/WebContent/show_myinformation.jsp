@@ -73,14 +73,14 @@
 					<input type="text" name="id" value= <%=rs.getString("id")%> disabled="true" >
 				</td>
 				<td>
-					<input type="password" name="pwd" value= <%=rs.getString("password") %> >
+					<input type="password" name="pwd" value= <%=rs.getString("password") %> minlength="6" maxlength="10">
 				</td>
 				<td>
 					<input type="text" id="information_addr" name="addr" value="<%=rs.getString("address")%>" >
 					
 				</td>
 				<td>
-					<input type="text"  name="phone" value=<%=rs.getString("phone")%> >
+					<input type="text"  name="phone" value=<%=rs.getString("phone")%> pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" title="ex)010-1111-2222" >
 				</td>
 				<td>
 					<%

@@ -16,24 +16,6 @@ public class Subject {
 	public Subject(){
 		
 	}
-	/*강의등록시 시간 겹침확인*/
-	public boolean check_time(String t) throws Exception{
-		String time[] = t.split("~");
-		String subject_number = "18-"+(find_subjectcount()+1);
-		conn = getConnection();
-		sql = "select * from subject where time between ? and ?";
-		pstmt = (PreparedStatement) conn.prepareStatement(sql);
-		pstmt.setString(1, time[0]);
-		pstmt.setString(2, time[1]);
-		
-		rs = pstmt.executeQuery();
-		if(rs.next()){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
 	
 	/*전체 - 수강편람 조회*/
 	public ResultSet show_Allsubject() throws Exception{
@@ -123,7 +105,7 @@ public class Subject {
 	/*신청 강의가 있는지 확인*/
 	private boolean check_mysubject(String id , String subject_num,String subject_name) throws Exception{
 		conn = getConnection();
-		sql = "select * from course where id =? && ( subject_number = ? || subject_name = ?)";
+		sql = "select * from course , subject where course.id =? && ( course.subject_number = ? or ( course.subject_number = subject.subject_number && subject.subject_name = ?));";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		pstmt.setString(2, subject_num);
@@ -140,14 +122,16 @@ public class Subject {
 	public boolean check_room(String time,String day, String place) throws Exception{
 		String t[] = time.split("~");
 		conn = getConnection();
-		sql = "select * from subject where ( ? > start_time and ? < end_time or ? > start_time and ? < end_time) && day = ? && place =?;";
+		sql = "select * from subject where ( (? > start_time and ? < end_time) or (? > start_time and ? < end_time) or ( ? < start_time && end_time < ?)  )&& day = ? && place =?;";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, t[0]);
 		pstmt.setString(2, t[0]);
 		pstmt.setString(3, t[1]);
 		pstmt.setString(4, t[1]);
-		pstmt.setString(5, day);
-		pstmt.setString(6,place);
+		pstmt.setString(5, t[0]);
+		pstmt.setString(6, t[1]);
+		pstmt.setString(7, day);
+		pstmt.setString(8,place);
 		rs = pstmt.executeQuery();
 		if(rs.next()){
 			return true;

@@ -39,23 +39,38 @@ public class Scholarship {
 		}
 		
 	}
-	
-	
-	/*관리자 - 전체 학생의 장학등록*/
-	public boolean give_scholarship(String id , String kind) throws Exception{
+	/*성적이 모두부여됬느지확인*/
+	public boolean check_givegrade(String id) throws Exception{
 
-		sql ="update scholarship set id=? , scholarship_kind =?";
+		sql ="select * from course where id= ? && grade = ''";
+		conn = getConnection();
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		pstmt.setString(1, id);
-		pstmt.setString(2, kind);
-		int result = pstmt.executeUpdate();
-		if( result == 1 ){
-			return true;
-		}
-		else{
+		rs = pstmt.executeQuery(sql);
+		if(rs.next()){
 			return false;
 		}
+		else{
+			return true;
+		}
 		
+	}
+	/*관리자 - 전체 학생의 장학등록*/
+	public int give_scholarship(String id , String kind) throws Exception{
+			conn = getConnection();
+			sql ="update scholarship set scholarship_kind =? where id=?";
+			pstmt = (PreparedStatement) conn.prepareStatement(sql);
+			pstmt.setString(1, kind);
+			pstmt.setString(2, id);
+			
+			int result = pstmt.executeUpdate();
+			if( result == 1 ){
+				return 1;
+			}
+			else{
+				return 0;
+			}
+	
 	}
 	
 	/*학생 - 장학여부 확인*/
@@ -72,8 +87,6 @@ public class Scholarship {
 		else{
 			return scholarship_type;
 		}
-		
-		
 	}
 	
 	public Connection getConnection() throws Exception{

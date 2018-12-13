@@ -102,7 +102,6 @@
 					i++;
 				%>
 				<%=kind %>
-				
 					<input  type="hidden" name="kind" value="<%=rs[0].getString("id")%>,<%=kind %>"/>
 				</td>
 				

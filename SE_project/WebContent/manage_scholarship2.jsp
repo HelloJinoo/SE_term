@@ -11,6 +11,7 @@
 <%request.setCharacterEncoding("utf-8"); %>
 <body>
 		<% 
+			
 			int flag =0;
 			Scholarship s = new Scholarship();
 			String value[] = request.getParameterValues("kind");
@@ -19,8 +20,8 @@
 				String values[] = value[i].split(",");
 				String id = values[0];
 				String kind = values[1];
-				boolean result = s.give_scholarship(id , kind);
-				if( result == true){
+				int result = s.give_scholarship(id , kind);
+				if( result == 1){
 					flag =1;
 				}
 			}
@@ -32,7 +33,7 @@
 					location.href="after_login_managerMain.jsp";
 					</script>
 				<% 
-			}else{
+			}else if( flag == 0){
 				%>
 					<script>
 					alert("장학여부 등록에 실패하였습니다.");
@@ -40,6 +41,7 @@
 					</script>
 				<% 
 			}
+			
 		
 		%>
 </body>
